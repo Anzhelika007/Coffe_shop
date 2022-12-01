@@ -11,16 +11,11 @@ admin.site.register(Category, CategoryAdmin)
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['name', 'slug', 'price', 'stock', 'available', 'created', 'updated']
+    search_fields = ("name__startswith",)
+    list_display = ['name', 'slug', 'category', 'price', 'stock', 'available', 'created', 'updated']
     list_filter = ['category', 'available', 'created', 'updated']
     list_editable = ['price', 'stock', 'available']
     prepopulated_fields = {'slug': ('name',)}
-
-    fieldsets = [
-        (u'', {
-            'fields': ('field_1', 'field_2')
-        }),
-    ]
 
 
 admin.site.register(Product, ProductAdmin)
